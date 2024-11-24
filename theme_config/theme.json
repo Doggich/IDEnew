@@ -1,0 +1,20 @@
+{
+  "Default": {"bg": "#FFFFFF", "fg": "#000000", "font": ["Consolas", 14], "insertbg":  "#000000", "selectbg":  "#48CAE4"},
+  "Dark": {"bg": "#000000", "fg": "#FFFFFF", "font": ["Helvetica", 14], "insertbg":  "#FFFFFF", "selectbg":  "#48CAE4"},
+  "Light": {"bg": "#FFFFFF", "fg":  "#000000", "font": ["Helvetica", 14], "insertbg":  "#000000", "selectbg":  "#48CAE4"},
+  "Contrast": {"bg":  "#FFFF00", "fg":  "#0000FF", "font": ["Times", 14], "insertbg":  "#D00000", "selectbg":  "#7209B7"},
+  "Console green": {"bg":  "#000000", "fg":  "#008000", "font": ["Courier", 14], "insertbg":  "#008000", "selectbg":  "#31572C"},
+  "Console magenta": {"bg":  "#000000", "fg":  "#FF00FF", "font": ["Courier", 14], "insertbg":  "#7209B7", "selectbg":  "#6411AD"},
+  "Sea": {"bg": "#264653", "fg": "#2A9D8F", "font": ["Century Gothic", 14], "insertbg":  "#9ED8DB", "selectbg":  "#81C3D7"},
+  "Forest": {"bg": "#4F772D", "fg": "#ECF39E", "font": ["Corbel", 14], "insertbg":  "#132A13", "selectbg":  "#155D27"},
+  "Melancholy": {"bg": "#A09ABC", "fg": "#E1DEE9", "font": ["Euphemia", 14], "insertbg":  "#1A1423", "selectbg":  "#372549"},
+  "Cream": {"bg": "#F5EBE0", "fg": "#A98467", "font": ["Euphemia", 14], "insertbg":  "#6B705C", "selectbg":  "#CB997E"},
+  "Obsidian": {"bg": "#433656", "fg": "#a39ab6", "font": ["Lucida Console", 14], "insertbg":  "#85769b", "selectbg":  "#85769b"},
+  "Memento mori": {"bg": "#233D4D", "fg": "#FE7F2D", "font": ["Segoe UI Historic", 14], "insertbg":  "#BC3908", "selectbg":  "#FF7900"},
+  "Old School": {"bg": "#0D21A1", "fg": "#FCF300", "font": ["Lucida Console", 12], "insertbg":  "#F8961E", "selectbg":  "#8C8F03"},
+  "Bookshelf": {"bg": "#F2E9E4", "fg": "#293241", "font": ["Droid", 12], "insertbg":  "#714A33", "selectbg":  "#373D20"},
+  "Lapis lazuli": {"bg":  "#232931", "fg":  "#eeeeee", "font": ["Courier", 14], "insertbg":  "#4ecca3", "selectbg":  "#028090"},
+  "Cute colors": {"bg":  "#1C1D21", "fg":  "#A288A6", "font": ["Lucida Console", 12], "insertbg":  "#5E548E", "selectbg":  "#BE95C4"},
+  "Autumn": {"bg":  "#131842", "fg":  "#E68369", "font": ["Lucida Console", 12], "insertbg":  "#DC5F00", "selectbg":  "#973131"},
+  "Concord": {"bg":  "#303841", "fg":  "#eeeeee", "font": ["Lucida Console", 12], "insertbg":  "#d72323", "selectbg":  "#3a4750"}
+}
