@@ -5,7 +5,7 @@ import subprocess
 import threading
 from tkinter import ttk
 import json
-from  module_importer import ModuleInstaller
+from module_importer import ModuleInstaller
 import pkgutil
 
 
@@ -144,7 +144,7 @@ class IDE:
     @staticmethod
     def run_snipet():
         try:
-            subprocess.call("start cmd /k python", shell=True)
+            subprocess.call("start cmd /k title NewSnipet & python /k ", shell=True)
         except Exception as e:
             messagebox.showerror("Error", str(e))
 
@@ -157,6 +157,7 @@ class IDE:
                                     theme_config["font"][1]),
                               insertbackground=theme_config["insertbg"].upper(),
                               selectbackground=theme_config["selectbg"].upper())
+        self.root.configure(bg=theme_config["windowbg"].upper())
 
     def create_new_window(self):
         new_window = tk.Toplevel(self.root)
