@@ -12,5 +12,5 @@
   "Old School": {"bg": "#0D21A1", "fg": "#FCF300", "font": ["Lucida Console", 12], "insertbg":  "#F8961E", "selectbg":  "#8C8F03", "windowbg": "#00204a"},
   "Cofi": {"bg": "#F2E9E4", "fg": "#293241", "font": ["Droid", 12], "insertbg":  "#714A33", "selectbg":  "#373D20", "windowbg": "#d1d1d1"},
   "Cabin boy": {"bg":  "#303841", "fg":  "#eeeeee", "font": ["Courier", 14], "insertbg":  "#00adb5", "selectbg":  "#ff5722", "windowbg": "#3e4149"},
-  "Autumn": {"bg":  "#3a4750", "fg":  "#eeeeee", "font": ["Lucida Console", 12], "insertbg":  "#d72323", "selectbg":  "#ed1f1f", "windowbg": "#303841"},
+  "Autumn": {"bg":  "#3a4750", "fg":  "#eeeeee", "font": ["Lucida Console", 12], "insertbg":  "#d72323", "selectbg":  "#ed1f1f", "windowbg": "#303841"}
 }
