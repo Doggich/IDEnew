@@ -31,7 +31,7 @@ def view_modules():
 
     formatted_module_names = ""
     for i, (index, module_name) in enumerate(module_names):
-        formatted_module_names += f"{index+1}: {module_name} "
+        formatted_module_names += f"{index + 1}: {module_name} "
         if (i + 1) % 5 == 0:
             formatted_module_names += "\n"
 
@@ -48,6 +48,8 @@ class IDE:
         self.menu = tk.Menu(self.root)
         self.root.config(menu=self.menu)
 
+        # File menu
+        self.root.option_add("*tearOff", False)
         self.file_menu = tk.Menu(self.menu)
         self.menu.add_cascade(label="File", menu=self.file_menu)
         self.file_menu.add_command(label="New (Ctrl + n)", command=self.new_file)
@@ -56,33 +58,44 @@ class IDE:
         self.file_menu.add_separator()
         self.file_menu.add_command(label="Exit", command=self.root.quit)
 
+        # Edit menu
         self.edit_menu = tk.Menu(self.menu)
         self.menu.add_cascade(label="Edit", menu=self.edit_menu)
         self.edit_menu.add_command(label="Cut (Ctrl + x)", command=self.cut)
         self.edit_menu.add_command(label="Copy (Ctrl + c)", command=self.copy)
         self.edit_menu.add_command(label="Paste (Ctrl + v)", command=self.paste)
 
+        # Execute menu and snippet
         self.exec_menu = tk.Menu(self.menu)
         self.menu.add_cascade(label="Execute", menu=self.exec_menu)
         self.exec_menu.add_command(label="Run code (Ctrl + r)", command=self.run_code)
         self.exec_menu.add_command(label="Run snipet (Ctrl + q)", command=self.run_snipet)
 
+        # Add menu
         self.add_menu = tk.Menu(self.menu)
         self.menu.add_cascade(label="Add", menu=self.add_menu)
         self.add_menu.add_command(label="Add page (Ctrl + j)", command=self.create_new_window)
 
+        # Module menu
         self.module_menu = tk.Menu(self.menu)
         self.menu.add_cascade(label="Modules", menu=self.module_menu)
-        self.module_menu.add_command(label="Module master (Ctrl + i)", command=self.open_module_settings)
+        self.module_menu.add_command(label="Module master (Ctrl + n)", command=self.open_module_settings)
         self.module_menu.add_command(label="View modules (Ctrl + m)", command=view_modules)
+
+        # Information menu
+        self.info_menu = tk.Menu(self.menu)
+        self.menu.add_cascade(label="Info.", menu=self.info_menu)
+        self.info_menu.add_command(label="About app (Ctrl + i)")
 
         self.text_area = tk.Text(self.root)
         self.text_area.pack(fill="both", expand=True, padx=5)
 
+        # Change themes
         self.theme_combobox = ttk.Combobox(self.root, values=THEMES)
         self.theme_combobox.bind("<<ComboboxSelected>>", self.change_theme)
         self.theme_combobox.pack()
 
+        # Hotkeys
         self.root.bind_all("<Control-j>", lambda event: self.create_new_window())
         self.root.bind_all("<Control-n>", lambda event: self.new_file())
         self.root.bind_all("<Control-s>", lambda event: self.save_file())
@@ -93,8 +106,7 @@ class IDE:
         self.root.bind_all("<Control-x>", lambda event: self.cut())
         self.root.bind_all("<Control-c>", lambda event: self.copy())
         self.root.bind_all("<Control-m>", lambda event: view_modules())
-        self.root.bind_all("<Control-i>", lambda event: self.open_module_settings())
-
+        self.root.bind_all("<Control-n>", lambda event: self.open_module_settings())
     def new_file(self):
         self.text_area.delete(1.0, "end")
 
@@ -151,13 +163,17 @@ class IDE:
     def change_theme(self, event):
         selected_theme = self.theme_combobox.get()
         theme_config = open_file("theme_config/theme.json")[selected_theme]
-        self.text_area.config(bg=theme_config["bg"].upper(),
-                              fg=theme_config["fg"].upper(),
-                              font=(theme_config["font"][0],
-                                    theme_config["font"][1]),
-                              insertbackground=theme_config["insertbg"].upper(),
-                              selectbackground=theme_config["selectbg"].upper())
+        self.text_area.config(
+            bg=theme_config["bg"].upper(),
+            fg=theme_config["fg"].upper(),
+            font=(theme_config["font"], theme_config["font"][1]),
+            insertbackground=theme_config["insertbg"].upper(),
+            selectbackground=theme_config["selectbg"].upper())
         self.root.configure(bg=theme_config["windowbg"].upper())
+        if theme_config["cursor_activ"].lower() == "default":
+            self.text_area.config(cursor="dot")
+        else:
+            self.text_area.config(cursor=theme_config["cursor_activ"])
 
     def create_new_window(self):
         new_window = tk.Toplevel(self.root)
