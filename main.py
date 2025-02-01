@@ -21,11 +21,11 @@ def iter_dict(dct: dict) -> list:
     return temp_lst
 
 
-THEMES = iter_dict(open_file(path.abspath("theme_config/theme.json")))
-ICON = path.abspath("theme_config/icon.ico")
+THEMES: str = iter_dict(open_file(path.abspath("theme_config/theme.json")))
+ICON: str = path.abspath("theme_config/icon.ico")
 
 
-def view_modules():
+def view_modules() -> None:
     module_names = [(i, module.name) for i, module in enumerate(pkgutil.iter_modules())]
     module_names.sort()
 
@@ -64,6 +64,8 @@ class IDE:
         self.edit_menu.add_command(label="Cut (Ctrl + x)", command=self.cut)
         self.edit_menu.add_command(label="Copy (Ctrl + c)", command=self.copy)
         self.edit_menu.add_command(label="Paste (Ctrl + v)", command=self.paste)
+        self.edit_menu.add_command(label="Undo (Ctrl + y)", command=self.undo)
+        self.edit_menu.add_command(label="Redo (Ctrl + u)", command=self.redo)
 
         # Execute menu and snippet
         self.exec_menu = tk.Menu(self.menu)
@@ -87,7 +89,7 @@ class IDE:
         self.menu.add_cascade(label="Info.", menu=self.info_menu)
         self.info_menu.add_command(label="About app (Ctrl + i)")
 
-        self.text_area = tk.Text(self.root)
+        self.text_area = tk.Text(self.root, undo=True)
         self.text_area.pack(fill="both", expand=True, padx=5)
 
         # Change themes
@@ -106,8 +108,11 @@ class IDE:
         self.root.bind_all("<Control-x>", lambda event: self.cut())
         self.root.bind_all("<Control-c>", lambda event: self.copy())
         self.root.bind_all("<Control-m>", lambda event: view_modules())
+        self.root.bind_all("<Control-y>", lambda event: self.undo())
+        self.root.bind_all("<Control-u>", lambda event: self.redo())
         self.root.bind_all("<Control-n>", lambda event: self.open_module_settings())
-    def new_file(self):
+
+    def new_file(self) -> None:
         self.text_area.delete(1.0, "end")
 
     def open_file(self):
@@ -139,6 +144,18 @@ class IDE:
 
     def paste(self):
         self.text_area.insert("insert", self.text_area.clipboard_get())
+
+    def undo(self):
+        try:
+            self.text_area.edit_undo()
+        except tk.TclError:
+            pass
+
+    def redo(self):
+        try:
+            self.text_area.edit_redo()
+        except tk.TclError:
+            pass
 
     def run_code(self):
         code = self.text_area.get(1.0, "end")
