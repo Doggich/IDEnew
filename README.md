@@ -17,12 +17,16 @@ This project is primarily aimed at beginner Python programmers.
 
 • Flexible Theme Customization: All themes can be changed via theme.json.
 
+* Highlight syntax: more syntax!
+
 ▎Photos ʕ•ᴥ•ʔ
 
-![image](https://github.com/user-attachments/assets/69db63ab-f4d0-4a36-b203-80779058d8fc)
-![image](https://github.com/user-attachments/assets/06f8394e-dda2-4f56-bced-42ab9113b003)
-![image](https://github.com/user-attachments/assets/e244abd3-6739-412d-bb56-e1cc833ab21b)
-![image](https://github.com/user-attachments/assets/1a9c4bfe-4e7f-452e-ba22-fa99f8137da1)
+![image](https://github.com/user-attachments/assets/f771cae5-3548-47fa-8d6a-b8a6eafaf130)
+![image](https://github.com/user-attachments/assets/02ae6422-54a7-4c22-aa3a-3f9efc568b7b)
+![image](https://github.com/user-attachments/assets/a4d6a827-0dd9-4817-8907-d76b8d075942)
+![image](https://github.com/user-attachments/assets/88c359c2-2b65-4bc7-b6bf-2fa6761f4ba0)
+![image](https://github.com/user-attachments/assets/b290d320-feed-4d49-926b-c4bab3c78d5b)
+
 
 
 
