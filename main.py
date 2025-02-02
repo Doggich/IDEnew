@@ -1,4 +1,5 @@
 from os import path
+import re
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import subprocess
@@ -21,7 +22,7 @@ def iter_dict(dct: dict) -> list:
     return temp_lst
 
 
-THEMES: str = iter_dict(open_file(path.abspath("theme_config/theme.json")))
+THEMES: list[str] = iter_dict(open_file(path.abspath("theme_config/theme.json")))
 ICON: str = path.abspath("theme_config/icon.ico")
 
 
@@ -47,6 +48,7 @@ class IDE:
 
         self.menu = tk.Menu(self.root)
         self.root.config(menu=self.menu)
+        self.syntax_colors = {}
 
         # File menu
         self.root.option_add("*tearOff", False)
@@ -92,6 +94,10 @@ class IDE:
         self.text_area = tk.Text(self.root, undo=True)
         self.text_area.pack(fill="both", expand=True, padx=5)
 
+        self.text_area.tag_config("red", foreground="red")
+        self.text_area.tag_config("blue", foreground="blue")
+        self.text_area.tag_config("green", foreground="green")
+
         # Change themes
         self.theme_combobox = ttk.Combobox(self.root, values=THEMES)
         self.theme_combobox.bind("<<ComboboxSelected>>", self.change_theme)
@@ -111,6 +117,72 @@ class IDE:
         self.root.bind_all("<Control-y>", lambda event: self.undo())
         self.root.bind_all("<Control-u>", lambda event: self.redo())
         self.root.bind_all("<Control-n>", lambda event: self.open_module_settings())
+        self.text_area.bind("<KeyRelease>", self.on_key_release)
+        self.on_key_release()
+
+    def highlight_words(self, words, tag):
+        content = self.text_area.get("1.0", tk.END)
+        self.text_area.tag_remove(tag, "1.0", tk.END)
+
+        # Escape special characters in the words list
+        escaped_words = [re.escape(word) for word in words]
+
+        # Define operators to highlight
+        operators = ['+=', '-=', '*=', '/=', '**=', '%=', '>', '<', '>=', '<=', '==', '!=', '<<=', '>>=', '&=', '|=',
+                     '^=', "->"]
+
+        # Join the escaped words with '|' and add word boundaries where appropriate
+        pattern = r'\b(?:' + '|'.join(escaped_words) + r')\b|(?:' + '|'.join(
+            re.escape(op) for op in operators) + r')'
+
+        for match in re.finditer(pattern, content):
+            start = self.text_area.index(f"1.0+{match.start()}c")
+            end = self.text_area.index(f"1.0+{match.end()}c")
+            self.text_area.tag_add(tag, start, end)
+
+    def delayed_highlight(self, words, color):
+        if hasattr(self, f'_highlight_after_{color}'):
+            self.text_area.after_cancel(getattr(self, f'_highlight_after_{color}'))
+        setattr(self, f'_highlight_after_{color}',
+                self.text_area.after(200, lambda: self.highlight_words(words, color)))
+
+    def on_key_release(self, event=None):
+        self.delayed_highlight(["print", "input", "int", "str", "float", "bool",
+                                "list", "set", "tuple", "dict", "complex", "__getattr__", "__setattr__",
+                                "__delattr__", "__getattribute__", "__len__", "__getitem__",
+                                "__setitem__", "__delitem__", "__iter__", "__reversed__", "__contains__",
+                                "__missing__", "__instancecheck__", "__subclasscheck__", "__call__", "__enter__",
+                                "__exit__", "__get__", "__set__", "__delete__", "__copy__", "__deepcopy__",
+                                "__getinitargs__", "__getnewargs__", "__getstate__", "__setstate__", "__reduce__",
+                                "__reduce_ex__"
+                                ], "SyntSet1")
+
+        self.delayed_highlight(
+            ["if", "else", "elif", "for", "while", "in", "and", "or",
+             "not", "try", "except", "finally", "frozenset", "abs", "max", "round",
+             "sum", "map", "filter", "len", "<<=", ">>=", "&=", "|=", "^=",
+             "__int__", "__long__", "__float__", "__complex__", "__oct__", "__hex__",
+             "__index__", "__trunc__", "__coerce__", "__str__", "__repr__", "__unicode__",
+             "__format__", "__nonzero__", "__dir__", "__sizeof__"
+             ], "SyntSet2")
+
+        self.delayed_highlight(["def", "class", "return", "import", "from", "as", "range",
+                                "__lshift__", "__rshift__", "__and__", "__or__", "__xor__",
+                                "__radd__", "__rsub__", "__rmul__", "__rfloordiv__", "__rdiv__",
+                                "__rtruediv__", "__rmod__", "__rdivmod__", "__rpow__", "__rlshift__", "__rrshift__",
+                                "__rand__", "__ror__", "__rxor__", "__iadd__", "__isub__", "__imul__", "__ifloordiv__",
+                                "__idiv__", "__itruediv__", "__imod__", "__ipow__", "__ilshift__", "__irshift__",
+                                "__iand__", "__ior__", "__ixor__", "->"
+                                ], "SyntSet3")
+
+        self.delayed_highlight(
+            ["True", "False", "None", "type", "+=", "-=", "*=", "lambda", "break", "open",
+             "/=", "**=", "%=", ">", "<", ">=", "<=", "==", "!=", "__init__", "__del__", "__new__",
+             "__cmp__", "__eq__", "__ne__", "__lt__", "__gt__", "__le__", "__ge__", "__pos__",
+             "__neg__", "__abs__", "__invert__", "__round__", "__floor__", "__ceil__", "__trunc__",
+             "__add__", "__sub__", "__mul__", "__floordiv__", "__div__", "__truediv__", "__mod__",
+             "__divmod__", "__pow__"
+             ], "SyntSet4")
 
     def new_file(self) -> None:
         self.text_area.delete(1.0, "end")
@@ -123,8 +195,10 @@ class IDE:
                 self.text_area.delete(1.0, "end")
                 with open(file_path, "r") as file:
                     self.text_area.insert("end", file.read())
+                self.on_key_release(None)
             except UnicodeDecodeError:
                 messagebox.showerror("Error", "Incorrect format!")
+        self.on_key_release(None)
 
     def save_file(self):
         file_path = filedialog.asksaveasfilename(
@@ -172,8 +246,10 @@ class IDE:
 
     @staticmethod
     def run_snipet():
+        from datetime import datetime
         try:
-            subprocess.call("start cmd /k title NewSnipet & python /k ", shell=True)
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            subprocess.call(f'start cmd /k "title Snippet {current_time} && python"', shell=True)
         except Exception as e:
             messagebox.showerror("Error", str(e))
 
@@ -183,7 +259,7 @@ class IDE:
         self.text_area.config(
             bg=theme_config["bg"].upper(),
             fg=theme_config["fg"].upper(),
-            font=(theme_config["font"], theme_config["font"][1]),
+            font=(theme_config["font"][0], theme_config["font"][1]),
             insertbackground=theme_config["insertbg"].upper(),
             selectbackground=theme_config["selectbg"].upper())
         self.root.configure(bg=theme_config["windowbg"].upper())
@@ -191,6 +267,15 @@ class IDE:
             self.text_area.config(cursor="dot")
         else:
             self.text_area.config(cursor=theme_config["cursor_activ"])
+
+        # Update syntax highlighting colors
+        self.syntax_colors = theme_config["syntax"]
+        self.update_syntax_highlighting()
+
+    def update_syntax_highlighting(self):
+        for tag, color in self.syntax_colors.items():
+            self.text_area.tag_config(tag, foreground=color)
+        self.on_key_release()
 
     def create_new_window(self):
         new_window = tk.Toplevel(self.root)
