@@ -9,43 +9,67 @@
     "insertbg": "#000000",
     "selectbg": "#48CAE4",
     "windowbg": "#FFFFFF",
-    "cursor_activ": "default"
+    "cursor_activ": "default",
+    "syntax": {
+      "SyntSet1": "#297f87",
+      "SyntSet2": "#df2e2e",
+      "SyntSet3": "#91c788",
+      "SyntSet4": "#7f5293"
+    }
   },
   "Dark": {
     "bg": "#11111e",
     "fg": "#71717e",
     "font": [
-      "Helvetica",
+      "Courier",
       14
     ],
-    "insertbg": "#31313e",
+    "insertbg": "#f1f1e8",
     "selectbg": "#21212e",
     "windowbg": "#41444b",
-    "cursor_activ": "default"
+    "cursor_activ": "default",
+    "syntax": {
+      "SyntSet1": "#ffa372",
+      "SyntSet2": "#b1e1a2",
+      "SyntSet3": "#f9d56e",
+      "SyntSet4": "#5d54a4"
+    }
   },
   "Light": {
     "bg": "#f7f2e7",
     "fg": "#797a7e",
     "font": [
-      "Helvetica",
+      "Courier",
       14
     ],
     "insertbg": "#52575d",
     "selectbg": "#d8d3cd",
     "windowbg": "#e6e0e0",
-    "cursor_activ": "default"
+    "cursor_activ": "default",
+    "syntax": {
+      "SyntSet1": "#297f87",
+      "SyntSet2": "#df2e2e",
+      "SyntSet3": "#91c788",
+      "SyntSet4": "#7f5293"
+    }
   },
   "Contrast": {
     "bg": "#252a34",
     "fg": "#eaeaea",
     "font": [
-      "Times",
+      "Consolas",
       14
     ],
     "insertbg": "#ff2e63",
     "selectbg": "#08d9d6",
     "windowbg": "#2d2c3a",
-    "cursor_activ": "dotbox"
+    "cursor_activ": "dotbox",
+    "syntax": {
+      "SyntSet1": "#51adcf",
+      "SyntSet2": "#4ecca3",
+      "SyntSet3": "#e11d74",
+      "SyntSet4": "#f9ed69"
+    }
   },
   "Console green": {
     "bg": "#382933",
@@ -57,7 +81,13 @@
     "insertbg": "#3b5249",
     "selectbg": "#a4b494",
     "windowbg": "#322f3d",
-    "cursor_activ": "target"
+    "cursor_activ": "target",
+    "syntax": {
+      "SyntSet1": "#299f82",
+      "SyntSet2": "#65d5a1",
+      "SyntSet3": "#91f09e",
+      "SyntSet4": "#caffb4"
+    }
   },
   "Console magenta": {
     "bg": "#252f40",
@@ -69,31 +99,31 @@
     "insertbg": "#6f5874",
     "selectbg": "#3e3e61",
     "windowbg": "#1c1b28",
-    "cursor_activ": "target"
+    "cursor_activ": "target",
+    "syntax": {
+      "SyntSet1": "#d19def",
+      "SyntSet2": "#6a477e",
+      "SyntSet3": "#aa71ca",
+      "SyntSet4": "#d19def"
+    }
   },
   "Sea": {
     "bg": "#1c1b28",
     "fg": "#b4d9b2",
     "font": [
-      "Century Gothic",
+      "Consolas",
       14
     ],
     "insertbg": "#719b9f",
     "selectbg": "#81b4a9",
     "windowbg": "#4a5f86",
-    "cursor_activ": "box_spiral"
-  },
-  "Melancholy": {
-    "bg": "#655b5a",
-    "fg": "#f3edd8",
-    "font": [
-      "Euphemia",
-      14
-    ],
-    "insertbg": "#c37f7c",
-    "selectbg": "#edd4c0",
-    "windowbg": "#464646",
-    "cursor_activ": "default"
+    "cursor_activ": "box_spiral",
+    "syntax": {
+      "SyntSet1": "#ffa372",
+      "SyntSet2": "#1a7ea3",
+      "SyntSet3": "#ef476f",
+      "SyntSet4": "#5d54a4"
+    }
   },
   "Obsidian": {
     "bg": "#303a52",
@@ -105,19 +135,13 @@
     "insertbg": "#9e579d",
     "selectbg": "#574b90",
     "windowbg": "#233142",
-    "cursor_activ": "default"
-  },
-  "Memento mori": {
-    "bg": "#155263",
-    "fg": "#fbf0f0",
-    "font": [
-      "Segoe UI Historic",
-      14
-    ],
-    "insertbg": "#ff9a3c",
-    "selectbg": "#ff6f3c",
-    "windowbg": "#071a52",
-    "cursor_activ": "default"
+    "cursor_activ": "default",
+    "syntax": {
+      "SyntSet1": "#ffa372",
+      "SyntSet2": "#b1e1a2",
+      "SyntSet3": "#e27396",
+      "SyntSet4": "#0e9594"
+    }
   },
   "Old School": {
     "bg": "#0D21A1",
@@ -129,19 +153,13 @@
     "insertbg": "#F8961E",
     "selectbg": "#8C8F03",
     "windowbg": "#00204a",
-    "cursor_activ": "arrow"
-  },
-  "Cofi": {
-    "bg": "#F2E9E4",
-    "fg": "#293241",
-    "font": [
-      "Droid",
-      12
-    ],
-    "insertbg": "#714A33",
-    "selectbg": "#373D20",
-    "windowbg": "#d1d1d1",
-    "cursor_activ": "pencil"
+    "cursor_activ": "arrow",
+    "syntax": {
+      "SyntSet1": "#81b214",
+      "SyntSet2": "#f45546",
+      "SyntSet3": "#b91212",
+      "SyntSet4": "#81b214"
+    }
   },
   "Cabin boy": {
     "bg": "#303841",
@@ -153,18 +171,12 @@
     "insertbg": "#00adb5",
     "selectbg": "#ff5722",
     "windowbg": "#3e4149",
-    "cursor_activ": "dotbox"
-  },
-  "Altair": {
-    "bg": "#3a4750",
-    "fg": "#eeeeee",
-    "font": [
-      "Lucida Console",
-      12
-    ],
-    "insertbg": "#d72323",
-    "selectbg": "#ed1f1f",
-    "windowbg": "#303841",
-    "cursor_activ": "dotbox"
+    "cursor_activ": "dotbox",
+    "syntax": {
+      "SyntSet1": "#ffa372",
+      "SyntSet2": "#b1e1a2",
+      "SyntSet3": "#f9d56e",
+      "SyntSet4": "#00ffaa"
+    }
   }
 }
